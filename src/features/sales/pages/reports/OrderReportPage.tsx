@@ -1,13 +1,15 @@
 import { type FC, useState, useCallback } from 'react';
-import { Box, Paper, Typography, TextField, MenuItem, ToggleButtonGroup, ToggleButton } from '@mui/material';
+import { Box, Paper, Typography, ToggleButtonGroup, ToggleButton, MenuItem, TextField } from '@mui/material';
 import { TableChart, BarChart as BarChartIcon } from '@mui/icons-material';
 import { PageHeader } from '../../../../components/common/PageHeader';
 import { useOlapReport } from '../../hooks/useOlapReport';
+import { useProductStores, useSalesChannels } from '../../hooks/useReportFilterOptions';
 import { OlapReportView } from './OlapReportView';
 import { ReportFilters } from './ReportFilters';
+import { FilterSelect } from './FilterSelect';
 import type { OlapParams } from '../../../../api/report.api';
 
-const ORDER_STATUS_OPTIONS = [
+const ORDER_STATUSES = [
   { value: '', label: 'Tất cả' },
   { value: 'ORDER_COMPLETED', label: 'Hoàn thành' },
   { value: 'ORDER_APPROVED', label: 'Đã duyệt' },
@@ -21,25 +23,28 @@ export const OrderReportPage: FC = () => {
   const [dateType, setDateType] = useState('MONTH');
   const [orderStatus, setOrderStatus] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'chart'>('grid');
+  const [store, setStore] = useState('');
+  const [channel, setChannel] = useState('');
   const [params, setParams] = useState<OlapParams | null>(null);
 
+  const stores = useProductStores();
+  const channels = useSalesChannels();
+
   const handleSubmit = useCallback(() => {
-    const base: Partial<OlapParams> = {
+    setParams({
+      serviceName: 'olapOtherTorSalesOrder',
+      olapType: viewMode === 'grid' ? 'GRID' : 'COLUMNCHART',
       customTime: customTime !== 'oo' ? customTime : undefined,
       fromDate: customTime === 'oo' ? fromDate : undefined,
       thruDate: customTime === 'oo' ? thruDate : undefined,
       dateType,
       orderStatusId: orderStatus || undefined,
-    };
-    setParams({
-      ...base,
-      serviceName: 'olapOtherTorSalesOrder',
-      olapType: viewMode === 'grid' ? 'GRID' : 'COLUMNCHART',
-      limit: viewMode === 'grid' ? 100 : undefined,
+      productStore: store || undefined,
+      storeChannel: channel || undefined,
     });
-  }, [customTime, fromDate, thruDate, dateType, orderStatus, viewMode]);
+  }, [customTime, fromDate, thruDate, dateType, orderStatus, viewMode, store, channel]);
 
-  const { data, isLoading, error } = useOlapReport(params);
+  const { data, isLoading, error, page, pageSize, totalSize, onPageChange, onPageSizeChange, columnFilters, onColumnFilterChange, isFetching } = useOlapReport(params);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, overflow: 'auto' }}>
@@ -50,17 +55,23 @@ export const OrderReportPage: FC = () => {
           dateType={dateType} onDateTypeChange={setDateType} showDateType
           onSubmit={handleSubmit} loading={isLoading}>
           <TextField size="small" select label="Trạng thái" value={orderStatus}
-            onChange={(e) => setOrderStatus(e.target.value)} sx={{ minWidth: 140 }}>
-            {ORDER_STATUS_OPTIONS.map((o) => <MenuItem key={o.value} value={o.value}>{o.label}</MenuItem>)}
+            onChange={(e) => setOrderStatus(e.target.value)} sx={{ minWidth: 130 }}>
+            {ORDER_STATUSES.map((o) => <MenuItem key={o.value} value={o.value}>{o.label}</MenuItem>)}
           </TextField>
+          <FilterSelect label="Cửa hàng" value={store} onChange={setStore}
+            options={stores.data} loading={stores.isLoading} />
+          <FilterSelect label="Kênh bán" value={channel} onChange={setChannel}
+            options={channels.data} loading={channels.isLoading} />
           <ToggleButtonGroup size="small" value={viewMode} exclusive onChange={(_, v) => v && setViewMode(v)}>
             <ToggleButton value="grid"><TableChart fontSize="small" /></ToggleButton>
             <ToggleButton value="chart"><BarChartIcon fontSize="small" /></ToggleButton>
           </ToggleButtonGroup>
         </ReportFilters>
         <Paper sx={{ p: 2 }}>
-          <Typography variant="subtitle2" sx={{ mb: 1 }}>Số lượng đơn hàng theo cửa hàng</Typography>
-          <OlapReportView data={data} isLoading={isLoading} error={error as Error} chartType="bar" />
+          <Typography variant="subtitle2" sx={{ mb: 1 }}>Báo cáo đơn hàng</Typography>
+          <OlapReportView data={data} isLoading={isLoading} error={error as Error}
+            page={page} pageSize={pageSize} totalSize={totalSize} onPageChange={onPageChange} onPageSizeChange={onPageSizeChange}
+            columnFilters={columnFilters} onColumnFilterChange={onColumnFilterChange} isFetching={isFetching} chartType="bar" />
         </Paper>
       </Box>
     </Box>

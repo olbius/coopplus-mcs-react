@@ -19,11 +19,10 @@ export const BehalfByOrderPage: FC = () => {
       customTime: customTime !== 'oo' ? customTime : undefined,
       fromDate: customTime === 'oo' ? fromDate : undefined,
       thruDate: customTime === 'oo' ? thruDate : undefined,
-      limit: 50,
     });
   }, [customTime, fromDate, thruDate]);
 
-  const { data, isLoading, error } = useOlapReport(params);
+  const { data, isLoading, error, page, pageSize, totalSize, onPageChange, onPageSizeChange, columnFilters, onColumnFilterChange, isFetching } = useOlapReport(params);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, overflow: 'auto' }}>
@@ -34,7 +33,9 @@ export const BehalfByOrderPage: FC = () => {
           onSubmit={handleSubmit} loading={isLoading} />
         <Paper sx={{ p: 2 }}>
           <Typography variant="subtitle2" sx={{ mb: 1 }}>Chi tiết thu hộ theo đơn hàng</Typography>
-          <OlapReportView data={data} isLoading={isLoading} error={error as Error} />
+          <OlapReportView data={data} isLoading={isLoading} error={error as Error}
+          page={page} pageSize={pageSize} totalSize={totalSize} onPageChange={onPageChange} onPageSizeChange={onPageSizeChange}
+            columnFilters={columnFilters} onColumnFilterChange={onColumnFilterChange} isFetching={isFetching} />
         </Paper>
       </Box>
     </Box>

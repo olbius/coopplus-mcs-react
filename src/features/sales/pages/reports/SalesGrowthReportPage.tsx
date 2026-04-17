@@ -38,7 +38,7 @@ export const SalesGrowthReportPage: FC = () => {
     });
   }, [typee, yearr, monthh, quarterr, viewMode]);
 
-  const { data, isLoading, error } = useOlapReport(params);
+  const { data, isLoading, error, page, pageSize, totalSize, onPageChange, onPageSizeChange, columnFilters, onColumnFilterChange, isFetching } = useOlapReport(params);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, overflow: 'auto' }}>
@@ -75,7 +75,9 @@ export const SalesGrowthReportPage: FC = () => {
         </Box>
         <Paper sx={{ p: 2 }}>
           <Typography variant="subtitle2" sx={{ mb: 1 }}>So sánh tăng trưởng</Typography>
-          <OlapReportView data={data} isLoading={isLoading} error={error as Error} chartType="line" />
+          <OlapReportView data={data} isLoading={isLoading} error={error as Error}
+          page={page} pageSize={pageSize} totalSize={totalSize} onPageChange={onPageChange} onPageSizeChange={onPageSizeChange}
+            columnFilters={columnFilters} onColumnFilterChange={onColumnFilterChange} isFetching={isFetching} chartType="line" />
         </Paper>
       </Box>
     </Box>

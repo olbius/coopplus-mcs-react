@@ -69,12 +69,23 @@ import { BehalfByOrderPage } from './features/accounting/pages/reports/BehalfByO
 import { IncomeStatementPage } from './features/accounting/pages/reports/IncomeStatementPage';
 import { IncomeGrowthPage } from './features/accounting/pages/reports/IncomeGrowthPage';
 import { ExpenseStatementPage } from './features/accounting/pages/reports/ExpenseStatementPage';
+import { PosSalesDetailPage } from './features/sales/pages/reports/pos/PosSalesDetailPage';
+import { PosReturnReportPage } from './features/sales/pages/reports/pos/PosReturnReportPage';
+import { PosBestSellerPage } from './features/sales/pages/reports/pos/PosBestSellerPage';
 import { FacilityListPage } from './features/logistics/pages/FacilityListPage';
 import { InventoryListPage } from './features/logistics/pages/InventoryListPage';
 import { ReturnListPage as LogReturnListPage } from './features/logistics/pages/ReturnListPage';
 import { LogTransferListPage } from './features/logistics/pages/TransferListPage';
 import { LogRequirementListPage } from './features/logistics/pages/RequirementListPage';
 import { LogReportsPage } from './features/logistics/pages/LogReportsPage';
+import { ExportWarehouseReportPage } from './features/logistics/pages/reports/ExportWarehouseReportPage';
+import { ExpectedExportReportPage } from './features/logistics/pages/reports/ExpectedExportReportPage';
+import { ReceiveWarehouseReportPage } from './features/logistics/pages/reports/ReceiveWarehouseReportPage';
+import { ExpectedReceiveReportPage } from './features/logistics/pages/reports/ExpectedReceiveReportPage';
+import { InventoryReportPage } from './features/logistics/pages/reports/InventoryReportPage';
+import { ReturnReportPage } from './features/logistics/pages/reports/ReturnReportPage';
+import { TransferReportPage } from './features/logistics/pages/reports/TransferReportPage';
+import { PhysicalInventoryReportPage } from './features/logistics/pages/reports/PhysicalInventoryReportPage';
 import { TransferDetailPage } from './features/logistics/pages/TransferDetailPage';
 import { RequirementDetailPage } from './features/logistics/pages/RequirementDetailPage';
 import { ShipmentListPage } from './features/logistics/pages/ShipmentListPage';
@@ -125,6 +136,10 @@ export const router = createBrowserRouter([
       { path: 'sales/reports/orders',            element: <OrderReportPage /> },
       { path: 'sales/reports/products',          element: <ProductReportPage /> },
       { path: 'sales/reports/customers',         element: <CustomerReportPage /> },
+      // POS reports
+      { path: 'sales/reports/pos-sales',         element: <PosSalesDetailPage /> },
+      { path: 'sales/reports/pos-return',        element: <PosReturnReportPage /> },
+      { path: 'sales/reports/pos-chart',         element: <PosBestSellerPage /> },
       { path: 'sales/file-exported',             element: <FileExportedPage /> },
       { path: 'sales/settings/common',              element: <CommonSettingPage /> },
       { path: 'sales/settings/common/time-period', element: <TimePeriodPage /> },
@@ -239,6 +254,14 @@ export const router = createBrowserRouter([
       { path: 'logistics/requirements/:requirementId', element: <RequirementDetailPage /> },
       // Báo cáo
       { path: 'logistics/reports',                   element: <LogReportsPage /> },
+      { path: 'logistics/reports/export',            element: <ExportWarehouseReportPage /> },
+      { path: 'logistics/reports/expected-export',   element: <ExpectedExportReportPage /> },
+      { path: 'logistics/reports/receive',           element: <ReceiveWarehouseReportPage /> },
+      { path: 'logistics/reports/expected-receive',  element: <ExpectedReceiveReportPage /> },
+      { path: 'logistics/reports/inventory',         element: <InventoryReportPage /> },
+      { path: 'logistics/reports/return',            element: <ReturnReportPage /> },
+      { path: 'logistics/reports/transfer',          element: <TransferReportPage /> },
+      { path: 'logistics/reports/physical-inventory', element: <PhysicalInventoryReportPage /> },
 
       // ═══ ADMIN (Quản trị) ═══
       { path: 'admin/webtools',                      element: <P title="Administration" /> },

@@ -52,6 +52,17 @@ export interface OlapParams {
   // Accounting
   reportType?: string;
   organizationPartyId?: string;
+  // POS
+  productId?: string;
+  categoryId?: string;
+  productStoreId?: string;
+  facilityId?: string;
+  sortField?: string;
+  sortOption?: string;
+  // Pagination
+  init?: string;
+  // Column filters
+  filterJson?: string;
 }
 
 export const reportApi = {
@@ -63,7 +74,7 @@ export const reportApi = {
       }
     }
     const res = await apiClient.post<OFBizResponse<{ reportData: OlapResult }>>(
-      '/services/olapReportBridgeREST', body, { timeout: 120000 });
+      '/services/olapReportBridgeREST', body, { timeout: 300000 });
     return res.data?.data?.reportData ?? { type: 'EMPTY' };
   },
 };
