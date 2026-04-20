@@ -1,12 +1,12 @@
 import { type FC } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
-  Box, Typography, Paper, Button, Chip, Divider, Grid,
+  Box, Typography, Paper, Button, Chip, Grid,
   List, ListItem, ListItemButton, ListItemText, ListItemIcon,
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   CircularProgress,
 } from '@mui/material';
-import { ArrowBack, Folder as FolderIcon, Inventory as ProductIcon } from '@mui/icons-material';
+import { ArrowBack, Folder as FolderIcon } from '@mui/icons-material';
 import { PageHeader } from '../../../components/common/PageHeader';
 import { useCategoryDetail } from '../hooks/useProducts';
 
@@ -34,8 +34,8 @@ export const CategoryDetailPage: FC = () => {
     <Box>
       <PageHeader
         breadcrumbs={[
-          { label: 'Mua sắm', href: '/po/products/categories' },
-          { label: 'Danh mục SP', href: '/po/products/categories' },
+          { label: 'Mua sắm', path: '/po/products/categories' },
+          { label: 'Danh mục SP', path: '/po/products/categories' },
           { label: category.productCategoryId },
         ]}
         actions={<Button startIcon={<ArrowBack />} onClick={() => navigate(-1)} size="small">Quay lại</Button>}

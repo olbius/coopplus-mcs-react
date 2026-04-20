@@ -3,7 +3,7 @@ import type {
   POFilters, POListResponse, PurchaseOrderDetail,
   ReturnSupplierListResponse, PurchaseAgreementListResponse,
   PurchaseRequirementListResponse,
-  Supplier, SupplierListResponse,
+  Supplier,
 } from '../types/purchasing.types';
 
 interface OFBizResponse<T> {

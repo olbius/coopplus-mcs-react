@@ -50,7 +50,7 @@ export const ReturnListPage: FC<Props> = ({ returnType }) => {
 
   const title = returnType === 'customer' ? 'Khách hàng trả lại' : 'Trả lại nhà cung cấp';
 
-  const columns: Column<Record<string, unknown>>[] = [
+  const columns: Column<Record<string, any>>[] = [
     { key: 'returnId', label: 'Mã trả hàng', width: 120,
       render: (r) => <Typography variant="body2" sx={{ fontWeight: 600 }}>{String(r.returnId ?? '')}</Typography>,
       filterRender: () => (

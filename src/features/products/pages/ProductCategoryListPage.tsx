@@ -182,10 +182,10 @@ export const ProductCategoryListPage: FC = () => {
         <DialogContent>
           <TextField label="Mã danh mục" size="small" fullWidth required sx={{ mt: 1, mb: 2 }}
             value={newCatId} onChange={(e) => setNewCatId(e.target.value.replace(/\s/g, '').replace(/[^a-zA-Z0-9_-]/g, ''))}
-            helperText="Không chứa ký tự đặc biệt, tối đa 60 ký tự" inputProps={{ maxLength: 60 }} />
+            helperText="Không chứa ký tự đặc biệt, tối đa 60 ký tự" slotProps={{ htmlInput: { maxLength: 60 } }} />
           <TextField label="Tên danh mục" size="small" fullWidth required sx={{ mb: 2 }}
             value={newCatName} onChange={(e) => setNewCatName(e.target.value)}
-            inputProps={{ maxLength: 100 }} />
+            slotProps={{ htmlInput: { maxLength: 100 } }} />
           <TextField label="Mô tả" size="small" fullWidth multiline rows={3}
             value={newCatDesc} onChange={(e) => setNewCatDesc(e.target.value)} />
         </DialogContent>

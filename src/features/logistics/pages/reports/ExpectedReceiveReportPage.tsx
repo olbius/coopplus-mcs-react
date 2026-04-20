@@ -2,8 +2,6 @@ import { type FC, useState, useCallback } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import { PageHeader } from '../../../../components/common/PageHeader';
 import { useOlapReport } from '../../../sales/hooks/useOlapReport';
-import { useFacilities } from '../../../sales/hooks/useReportFilterOptions';
-import { FilterSelect } from '../../../sales/pages/reports/FilterSelect';
 import { OlapReportView } from '../../../sales/pages/reports/OlapReportView';
 import { ReportFilters } from '../../../sales/pages/reports/ReportFilters';
 import type { OlapParams } from '../../../../api/report.api';
@@ -13,9 +11,6 @@ export const ExpectedReceiveReportPage: FC = () => {
   const [fromDate, setFromDate] = useState('');
   const [thruDate, setThruDate] = useState('');
   const [params, setParams] = useState<OlapParams | null>(null);
-
-  const [facility, setFacility] = useState('');
-  const facilities = useFacilities();
 
   const handleSubmit = useCallback(() => {
     setParams({

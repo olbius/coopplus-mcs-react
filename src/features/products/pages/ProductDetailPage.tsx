@@ -36,8 +36,8 @@ export const ProductDetailPage: FC = () => {
     <Box>
       <PageHeader
         breadcrumbs={[
-          { label: 'Mua sắm', href: '/po/products' },
-          { label: 'Sản phẩm', href: '/po/products' },
+          { label: 'Mua sắm', path: '/po/products' },
+          { label: 'Sản phẩm', path: '/po/products' },
           { label: product.productId },
         ]}
         actions={

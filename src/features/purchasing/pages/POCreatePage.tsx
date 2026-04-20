@@ -6,7 +6,7 @@ import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   IconButton, Grid,
 } from '@mui/material';
-import { ArrowBack, Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { ArrowBack, Delete as DeleteIcon } from '@mui/icons-material';
 import { PageHeader } from '../../../components/common/PageHeader';
 import { useToast } from '../../../contexts/ToastContext';
 import { purchasingApi } from '../../../api/purchasing.api';
@@ -107,8 +107,8 @@ export const POCreatePage: FC = () => {
     <Box>
       <PageHeader
         breadcrumbs={[
-          { label: 'Mua sắm', href: '/po/orders' },
-          { label: 'Quản lý đơn mua', href: '/po/orders' },
+          { label: 'Mua sắm', path: '/po/orders' },
+          { label: 'Quản lý đơn mua', path: '/po/orders' },
           { label: 'Tạo mới' },
         ]}
         actions={

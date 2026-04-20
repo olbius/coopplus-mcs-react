@@ -1,4 +1,4 @@
-import { type FC, useState } from 'react';
+import { type FC, type ElementType, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   Box, Typography, Paper, Grid, Button, Chip, Divider,
@@ -23,7 +23,7 @@ const fmtDate = (s?: string) => {
   return isNaN(d.getTime()) ? s : d.toLocaleDateString('vi-VN');
 };
 
-const ACTION_MAP: Record<string, { label: string; color: 'success' | 'error' | 'warning' | 'info'; icon: FC<{fontSize?: string}>; targetStatus: string }> = {
+const ACTION_MAP: Record<string, { label: string; color: 'success' | 'error' | 'warning' | 'info'; icon: ElementType; targetStatus: string }> = {
   approve: { label: 'Duyệt đơn', color: 'success', icon: CheckCircle, targetStatus: 'ORDER_APPROVED' },
   cancel: { label: 'Hủy đơn', color: 'error', icon: Cancel, targetStatus: 'ORDER_CANCELLED' },
   hold: { label: 'Tạm giữ', color: 'warning', icon: Pause, targetStatus: 'ORDER_HOLD' },
@@ -190,7 +190,7 @@ export const SalesOrderDetailPage: FC = () => {
                   <TableCell align="right">{String(item.quantity ?? '')}</TableCell>
                   <TableCell align="right">{fmt(item.unitPrice as number, order.currencyUom as string)}</TableCell>
                   <TableCell align="right">{fmt(item.subTotal as number, order.currencyUom as string)}</TableCell>
-                  <TableCell>{item.statusId && <StatusBadge status={String(item.statusId)} label={String(item.statusDescription ?? item.statusId ?? '')} />}</TableCell>
+                  <TableCell>{Boolean(item.statusId) && <StatusBadge status={String(item.statusId)} label={String(item.statusDescription ?? item.statusId ?? '')} />}</TableCell>
                 </TableRow>
               )) : (
                 <TableRow><TableCell colSpan={7} align="center"><Typography variant="body2" color="text.disabled" sx={{ py: 2 }}>Không có sản phẩm</Typography></TableCell></TableRow>
@@ -248,7 +248,7 @@ export const SalesOrderDetailPage: FC = () => {
                     <TableRow key={i}>
                       <TableCell>{String(p.paymentMethodTypeId ?? p.paymentMethodType ?? '—')}</TableCell>
                       <TableCell align="right">{fmt(p.amount as number, order.currencyUom as string)}</TableCell>
-                      <TableCell>{p.statusId && <StatusBadge status={String(p.statusId)} label={String(p.statusDescription ?? p.statusId ?? '')} />}</TableCell>
+                      <TableCell>{Boolean(p.statusId) && <StatusBadge status={String(p.statusId)} label={String(p.statusDescription ?? p.statusId ?? '')} />}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -266,7 +266,7 @@ export const SalesOrderDetailPage: FC = () => {
                 <Box key={i} sx={{ display: 'flex', gap: 2, alignItems: 'center', py: 0.5 }}>
                   <Chip label={String(h.statusDescription ?? h.statusId ?? '')} size="small" variant="outlined" />
                   <Typography variant="caption" color="text.secondary">{fmtDate(h.statusDatetime as string)}</Typography>
-                  {h.statusUserLogin && <Typography variant="caption" color="text.secondary">bởi {String(h.statusUserLogin)}</Typography>}
+                  {Boolean(h.statusUserLogin) && <Typography variant="caption" color="text.secondary">bởi {String(h.statusUserLogin)}</Typography>}
                 </Box>
               ))}
             </Paper>

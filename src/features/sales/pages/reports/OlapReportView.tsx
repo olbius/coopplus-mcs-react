@@ -64,7 +64,7 @@ interface GridViewProps {
   isFetching: boolean;
 }
 
-const GridView: FC<GridViewProps> = ({ result, page, pageSize, totalSize, onPageChange, onPageSizeChange, columnFilters, onColumnFilterChange, isFetching }) => {
+const GridView: FC<GridViewProps> = ({ result, page, pageSize, totalSize, onPageChange, onPageSizeChange, onColumnFilterChange, isFetching }) => {
   const [filtersVisible, setFiltersVisible] = useState(false);
   const [filterValues, setFilterValues] = useState<Record<string, string>>({});
 

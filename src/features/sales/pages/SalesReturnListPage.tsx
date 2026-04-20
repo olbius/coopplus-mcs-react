@@ -132,7 +132,7 @@ export const SalesReturnListPage: FC = () => {
     },
     {
       key: 'orderId', label: 'Mã đơn hàng', width: 140,
-      render: (row) => <Typography variant="body2">{String((row as Record<string, unknown>).orderId ?? '—')}</Typography>,
+      render: (row) => <Typography variant="body2">{String((row as unknown as Record<string, unknown>).orderId ?? '—')}</Typography>,
       filterRender: makeTextFilter(filterOrderId, setFilterOrderId),
     },
     {
@@ -142,7 +142,7 @@ export const SalesReturnListPage: FC = () => {
     },
     {
       key: 'createdBy', label: 'Người tạo', width: 150,
-      render: (row) => <Typography variant="body2">{String((row as Record<string, unknown>).createdBy ?? '—')}</Typography>,
+      render: (row) => <Typography variant="body2">{String((row as unknown as Record<string, unknown>).createdBy ?? '—')}</Typography>,
       filterRender: makeTextFilter(filterCreatedBy, setFilterCreatedBy),
     },
     {

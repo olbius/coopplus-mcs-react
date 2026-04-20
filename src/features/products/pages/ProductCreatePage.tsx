@@ -152,7 +152,7 @@ export const ProductCreatePage: FC = () => {
   return (
     <Box>
       <PageHeader
-        breadcrumbs={[{ label: 'Mua sắm', href: '/po/products' }, { label: 'Sản phẩm', href: '/po/products' }, { label: 'Tạo mới sản phẩm' }]}
+        breadcrumbs={[{ label: 'Mua sắm', path: '/po/products' }, { label: 'Sản phẩm', path: '/po/products' }, { label: 'Tạo mới sản phẩm' }]}
         actions={<Button startIcon={<ArrowBack />} onClick={() => navigate('/po/products')} size="small">Quay lại</Button>}
       />
 

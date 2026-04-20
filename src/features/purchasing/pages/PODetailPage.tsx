@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   Box, Typography, Paper, Grid, Chip, Divider, Button,
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-  CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, TextField,
+  CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions,
 } from '@mui/material';
 import { ArrowBack, CheckCircle, Cancel, PictureAsPdf, Done } from '@mui/icons-material';
 import { PageHeader } from '../../../components/common/PageHeader';
@@ -60,8 +60,8 @@ export const PODetailPage: FC = () => {
     <Box>
       <PageHeader
         breadcrumbs={[
-          { label: 'Mua sắm', href: '/po/orders' },
-          { label: 'Quản lý đơn mua', href: '/po/orders' },
+          { label: 'Mua sắm', path: '/po/orders' },
+          { label: 'Quản lý đơn mua', path: '/po/orders' },
           { label: order.orderId },
         ]}
         actions={

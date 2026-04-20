@@ -23,7 +23,7 @@ export const FacilityRolePage: FC = () => {
   const { data, isLoading, isFetching, refetch } = useQuery({
     queryKey: ['log-facility-roles', page, pageSize],
     queryFn: () => logisticsApi.listFacilityPartyRoles(page, pageSize),
-    placeholderData: (prev: { roleList: Record<string, unknown>[]; totalRows: number } | undefined) => prev,
+    placeholderData: (prev: { roleList: Record<string, any>[]; totalRows: number } | undefined) => prev,
   });
 
   // Client-side filter on top of server-side pagination
@@ -44,9 +44,9 @@ export const FacilityRolePage: FC = () => {
   const handleClearFilters = () => { setFilterFacility(''); setFilterParty(''); setFilterRole(''); };
 
   const [addOpen, setAddOpen] = useState(false);
-  const [selectedFacility, setSelectedFacility] = useState<Record<string, unknown> | null>(null);
-  const [selectedParty, setSelectedParty] = useState<Record<string, unknown> | null>(null);
-  const [selectedRole, setSelectedRole] = useState<Record<string, unknown> | null>(null);
+  const [selectedFacility, setSelectedFacility] = useState<Record<string, any> | null>(null);
+  const [selectedParty, setSelectedParty] = useState<Record<string, any> | null>(null);
+  const [selectedRole, setSelectedRole] = useState<Record<string, any> | null>(null);
   const handleAddOpen = () => { setSelectedFacility(null); setSelectedParty(null); setSelectedRole(null); setAddOpen(true); };
   const reqLabel = (text: string) => <>{text} <span style={{ color: 'red' }}>*</span></>;
   const qc = useQueryClient();
@@ -63,13 +63,13 @@ export const FacilityRolePage: FC = () => {
   const { data: facilityOpts } = useQuery({ queryKey: ['facilities-opts'], queryFn: () => logisticsApi.listFacilities(0, 100, {}), enabled: addOpen });
   const { data: roleOpts } = useQuery({ queryKey: ['role-types-opts'], queryFn: () => salesApi.listRoleTypes(), enabled: addOpen });
   const [partySearch, setPartySearch] = useState('');
-  const [partyOpts, setPartyOpts] = useState<Record<string, unknown>[]>([]);
+  const [partyOpts, setPartyOpts] = useState<Record<string, any>[]>([]);
   useEffect(() => {
     if (!addOpen || partySearch.length < 2) { setPartyOpts([]); return; }
     const t = setTimeout(async () => {
       try {
         const res = await apiClient.post('/services/listParties', { pageIndex: '0', pageSize: '20', keyword: partySearch });
-        setPartyOpts((res.data as { data?: { partyList?: Record<string, unknown>[] } })?.data?.partyList ?? []);
+        setPartyOpts((res.data as { data?: { partyList?: Record<string, any>[] } })?.data?.partyList ?? []);
       } catch { setPartyOpts([]); }
     }, 300);
     return () => clearTimeout(t);
@@ -80,7 +80,7 @@ export const FacilityRolePage: FC = () => {
       slotProps={{ input: { disableUnderline: true, sx: { fontSize: '0.8125rem' } } }} />
   );
 
-  const columns: Column<Record<string, unknown>>[] = [
+  const columns: Column<Record<string, any>>[] = [
     { key: 'facilityId', label: 'Kho', width: 100,
       render: (r) => <Typography variant="body2" sx={{ fontWeight: 600 }}>{String(r.facilityId ?? '')}</Typography>,
       filterRender: makeTextFilter(filterFacility, setFilterFacility) },

@@ -87,7 +87,7 @@ export function useOlapReport(
     return {
       ...params,
       limit: pageSize,
-      offset: String(page * pageSize),
+      offset: page * pageSize,
       init: needsInit ? 'true' : undefined,
       filterJson: buildFilterJson(columnFilters),
     };

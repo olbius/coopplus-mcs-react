@@ -1,7 +1,7 @@
 import { type FC, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
-  Box, Typography, Paper, Button, Grid, Tabs, Tab, Chip, Divider,
+  Box, Typography, Paper, Button, Grid, Tabs, Tab,
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   CircularProgress,
 } from '@mui/material';
@@ -43,8 +43,8 @@ export const SupplierDetailPage: FC = () => {
     <Box>
       <PageHeader
         breadcrumbs={[
-          { label: 'Mua sắm', href: '/po/suppliers' },
-          { label: 'Nhà cung cấp', href: '/po/suppliers' },
+          { label: 'Mua sắm', path: '/po/suppliers' },
+          { label: 'Nhà cung cấp', path: '/po/suppliers' },
           { label: supplier.partyId },
         ]}
         actions={<Button startIcon={<ArrowBack />} onClick={() => navigate('/po/suppliers')} size="small">Quay lại</Button>}

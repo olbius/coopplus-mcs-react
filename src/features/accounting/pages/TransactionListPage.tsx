@@ -1,6 +1,6 @@
 import { type FC, useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Box, Typography, IconButton, Tooltip, TextField, Chip, Collapse,
+import { Box, Typography, IconButton, Tooltip, TextField, Chip,
   Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { Refresh as RefreshIcon, FilterList as FilterIcon, FilterListOff as FilterOffIcon,
   KeyboardArrowDown, KeyboardArrowRight } from '@mui/icons-material';
