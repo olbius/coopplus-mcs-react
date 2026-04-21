@@ -8,6 +8,13 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . .
+
+# API base URL baked into the bundle at build time. Default is a
+# same-origin relative path so the nginx proxy in this image forwards
+# /rest/* to BACKEND_URL. Override with --build-arg for an app talking
+# directly to an external API host (then the backend must allow CORS).
+ARG VITE_API_BASE_URL=/rest
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 RUN npm run build
 
 
